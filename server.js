@@ -65,7 +65,7 @@ app.get('/api/health', (req, res) => {
       credentials: corsOptions.credentials
     },
     environment: process.env.NODE_ENV || 'development',
-    port: PORT
+    port: process.env.PORT || 5000
   });
 });
 
