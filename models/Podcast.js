@@ -3,19 +3,14 @@ const mongoose = require('mongoose');
 const podcastSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, 'Title is required'],
-    trim: true,
-    maxlength: [200, 'Title cannot exceed 200 characters']
+    trim: true
   },
   description: {
     type: String,
-    required: [true, 'Description is required'],
-    trim: true,
-    maxlength: [2000, 'Description cannot exceed 2000 characters']
+    trim: true
   },
   duration: {
     type: String,
-    required: [true, 'Duration is required'],
     trim: true
   },
   guest_id: {
@@ -26,8 +21,7 @@ const podcastSchema = new mongoose.Schema({
   guest_name: {
     type: String,
     default: '',
-    trim: true,
-    maxlength: [100, 'Guest name cannot exceed 100 characters']
+    trim: true
   },
   series_id: {
     type: String,
@@ -36,35 +30,21 @@ const podcastSchema = new mongoose.Schema({
   },
   episode_number: {
     type: Number,
-    default: null,
-    min: [1, 'Episode number must be at least 1']
+    default: null
   },
   image: {
     type: String,
-    required: [true, 'Episode image URL is required'],
     trim: true
   },
   audio_url: {
     type: String,
     default: '',
-    trim: true,
-    validate: {
-      validator: function(v) {
-        return !v || /^https?:\/\/.*\.(mp3|wav|ogg|m4a|aac)$/i.test(v) || /^https?:\/\/.*/i.test(v);
-      },
-      message: 'Must be a valid audio URL'
-    }
+    trim: true
   },
   youtube_url: {
     type: String,
     default: '',
-    trim: true,
-    validate: {
-      validator: function(v) {
-        return !v || /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\/.*/.test(v);
-      },
-      message: 'Must be a valid YouTube URL'
-    }
+    trim: true
   },
   spotify_url: {
     type: String,
@@ -84,20 +64,17 @@ const podcastSchema = new mongoose.Schema({
   transcript: {
     type: String,
     default: '',
-    trim: true,
-    maxlength: [50000, 'Transcript cannot exceed 50000 characters']
+    trim: true
   },
   tags: {
     type: String,
     default: '',
-    trim: true,
-    maxlength: [500, 'Tags cannot exceed 500 characters']
+    trim: true
   },
   meta_description: {
     type: String,
     default: '',
-    trim: true,
-    maxlength: [160, 'Meta description cannot exceed 160 characters']
+    trim: true
   },
   featured: {
     type: Boolean,
@@ -105,9 +82,8 @@ const podcastSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    required: [true, 'Status is required'],
     enum: ['draft', 'published', 'scheduled'],
-    default: 'draft'
+    default: 'published'
   },
   publish_date: {
     type: Date,
@@ -123,9 +99,7 @@ const podcastSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    default: 0,
-    min: [0, 'Rating cannot be negative'],
-    max: [5, 'Rating cannot exceed 5']
+    default: 0
   },
   likes: {
     type: Number,
