@@ -45,7 +45,7 @@ const getPublicArticles = async (req, res) => {
       .sort({ publishDate: -1, createdAt: -1 })
       .skip(skip)
       .limit(parseInt(limit))
-      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage allowComments')
+      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage featuredImageAlt additionalImages allowComments')
       .lean();
 
     // Get total count
@@ -86,7 +86,7 @@ const getEditorsPickArticles = async (req, res) => {
     })
       .sort({ publishDate: -1, createdAt: -1 })
       .limit(4)
-      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage allowComments')
+      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage featuredImageAlt additionalImages allowComments')
       .lean();
 
     res.json({
@@ -114,7 +114,7 @@ const getMainArticles = async (req, res) => {
       status: 'published',
       isMainArticle: true 
     })
-      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage allowComments')
+      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage featuredImageAlt additionalImages allowComments')
       .lean();
 
     // Get second main article
@@ -122,7 +122,7 @@ const getMainArticles = async (req, res) => {
       status: 'published',
       isSecondMainArticle: true 
     })
-      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage allowComments')
+      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage featuredImageAlt additionalImages allowComments')
       .lean();
 
     res.json({
@@ -168,7 +168,7 @@ const getRegularArticles = async (req, res) => {
       .sort({ publishDate: -1, createdAt: -1 })
       .skip(skip)
       .limit(parseInt(limit))
-      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage allowComments')
+      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage featuredImageAlt additionalImages allowComments')
       .lean();
 
     // Get total count
@@ -209,7 +209,7 @@ const getFeaturedArticles = async (req, res) => {
     })
       .sort({ publishDate: -1, createdAt: -1 })
       .limit(3)
-      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage allowComments')
+      .select('title subtitle excerpt content author categoryName category featured trending editors_pick isMainArticle isSecondMainArticle publishDate views readTime tags featured_image featuredImage featuredImageAlt additionalImages allowComments')
       .lean();
 
     res.json({
@@ -266,7 +266,7 @@ const getPublicArticle = async (req, res) => {
     const article = await Article.findOne({ 
       _id: id, 
       status: 'published' 
-    }).select('title subtitle excerpt content author authorBio categoryName category featured trending publishDate views readTime tags featured_image featuredImage featuredImageAlt allowComments')
+    }).select('title subtitle excerpt content author authorBio categoryName category featured trending publishDate views readTime tags featured_image featuredImage featuredImageAlt additionalImages allowComments')
       .lean();
 
     if (!article) {

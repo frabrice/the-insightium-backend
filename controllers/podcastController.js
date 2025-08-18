@@ -13,9 +13,15 @@ const createPodcast = async (req, res) => {
     });
   } catch (error) {
     if (error.name === 'ValidationError') {
-      const errors = {};
+      const errors = [];
       for (let field in error.errors) {
-        errors[field] = error.errors[field].message;
+        errors.push({
+          type: 'field',
+          value: req.body[field],
+          msg: error.errors[field].message,
+          path: field,
+          location: 'body'
+        });
       }
       return res.status(400).json({
         success: false,
@@ -160,9 +166,15 @@ const updatePodcast = async (req, res) => {
     });
   } catch (error) {
     if (error.name === 'ValidationError') {
-      const errors = {};
+      const errors = [];
       for (let field in error.errors) {
-        errors[field] = error.errors[field].message;
+        errors.push({
+          type: 'field',
+          value: req.body[field],
+          msg: error.errors[field].message,
+          path: field,
+          location: 'body'
+        });
       }
       return res.status(400).json({
         success: false,
